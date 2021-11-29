@@ -25,9 +25,14 @@ public class CalculatorKata {
 
         String[] split = numbers.split(delimiter);
 
-        int[] ints = Arrays.stream(split).filter(s -> !s.isEmpty()).filter(s -> Integer.parseInt(s) < 0).mapToInt(Integer::parseInt).toArray();
-        if(ints.length != 0){
-            throw new NegativeNumberException("negatives not allowed : "+ Arrays.stream(ints).mapToObj(String::valueOf).collect(Collectors.joining(",")));
+        String negativeNumbers = Arrays.stream(split)
+                .filter(s -> !s.isEmpty() && Integer.parseInt(s) < 0)
+                .mapToInt(Integer::parseInt)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.joining(","));
+
+        if(!negativeNumbers.isEmpty()){
+            throw new NegativeNumberException("negatives not allowed : "+ negativeNumbers);
         }
 
         return Arrays.stream(split).filter(s -> !s.isEmpty()).mapToInt(Integer::parseInt).sum();
