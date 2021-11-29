@@ -1,4 +1,5 @@
 import exceptions.FormatIncorrectException;
+import exceptions.NegativeNumberException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class KataLogTestStepOne {
 
     @Test
-    void testStepOneEmptyString() throws FormatIncorrectException {
+    void testStepOneEmptyString() throws FormatIncorrectException, NegativeNumberException {
         CalculatorKata calculatorKata = new CalculatorKata();
         int add = calculatorKata.add("");
 
@@ -15,7 +16,7 @@ public class KataLogTestStepOne {
     }
 
     @Test
-    void testStepOneSimpleNumber() throws FormatIncorrectException{
+    void testStepOneSimpleNumber() throws FormatIncorrectException, NegativeNumberException{
         CalculatorKata calculatorKata = new CalculatorKata();
         int add = calculatorKata.add("1");
 
@@ -23,7 +24,7 @@ public class KataLogTestStepOne {
     }
 
     @Test
-    void testStepOneTwoNumber() throws FormatIncorrectException{
+    void testStepOneTwoNumber() throws FormatIncorrectException, NegativeNumberException{
         CalculatorKata calculatorKata = new CalculatorKata();
         int add = calculatorKata.add("1,2");
 
@@ -31,7 +32,7 @@ public class KataLogTestStepOne {
     }
 
     @Test
-    void testStepOneTwoNumberWithIncorrectValue() throws FormatIncorrectException{
+    void testStepOneTwoNumberWithIncorrectValue() throws FormatIncorrectException, NegativeNumberException{
         CalculatorKata calculatorKata = new CalculatorKata();
         int addOne = calculatorKata.add("1,");
         int addTwo = calculatorKata.add(",1");
