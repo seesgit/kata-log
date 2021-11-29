@@ -1,3 +1,4 @@
+import exceptions.FormatIncorrectException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class KataLogTestStepThree {
 
     @Test
-    void testStepThreeWithNewLine(){
+    void testStepThreeWithNewLine() throws FormatIncorrectException {
         CalculatorKata calculatorKata = new CalculatorKata();
         int add = calculatorKata.add("1\n2,2");
 
@@ -14,9 +15,8 @@ public class KataLogTestStepThree {
     }
 
     @Test
-    void testStepThreeWithIncorrectFormat() {
+    void testStepThreeWithIncorrectFormat() throws FormatIncorrectException{
         CalculatorKata calculatorKata = new CalculatorKata();
-//        int add = calculatorKata.add("1,2,\n3");
         assertThrows(FormatIncorrectException.class,() -> calculatorKata.add("1,2,\n3"));
 
     }
