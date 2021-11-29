@@ -17,7 +17,23 @@ public class CalculatorKata {
         }
 
         String delimiter = ",|\\n";
-        if(numbers.startsWith("//")){
+        if(numbers.startsWith("//[")){
+
+
+            String specificDelimiter = numbers.substring(3,numbers.indexOf("]"));
+            char[] chars = specificDelimiter.toCharArray();
+            StringBuilder stringBuilder = new StringBuilder();
+            for (char aChar : chars) {
+                if (isSpecificCharacter(aChar)) {
+                    stringBuilder.append("\\").append(aChar);
+                } else {
+                    stringBuilder.append(aChar);
+                }
+            }
+            delimiter = delimiter.concat("|"+ stringBuilder);
+            numbers = numbers.substring(numbers.indexOf("]")+1);
+
+        } else if(numbers.startsWith("//")){
 
             delimiter = delimiter.concat("|"+ numbers.charAt(2));
             numbers = numbers.substring(2);
@@ -36,5 +52,14 @@ public class CalculatorKata {
         }
 
         return Arrays.stream(split).filter(s -> !s.isEmpty() && Integer.parseInt(s)<=1000).mapToInt(Integer::parseInt).sum();
+    }
+
+    private boolean isSpecificCharacter(char c) {
+        // . ^ $ * + - ? ( ) [ ] { } \ | — /
+        return c == '.' || c == '^' || c == '$' || c == '*'
+                || c == '+' || c == '-' || c == '?' || c == '('
+                || c == ')' || c == '[' || c == ']' || c == '{'
+                || c == '}' || c == '\\' || c == '|' || c == '—'
+                || c=='/';
     }
 }
