@@ -14,7 +14,14 @@ public class CalculatorKata {
             throw new FormatIncorrectException();
         }
 
-            String[] split = numbers.split(",|\\n");
+        String delimiter = ",|\\n";
+        if(numbers.startsWith("//")){
+
+            delimiter = delimiter.concat("|"+ numbers.charAt(2));
+            numbers = numbers.substring(2);
+        }
+
+        String[] split = numbers.split(delimiter);
 
         return Arrays.stream(split).filter(s -> !s.isEmpty()).mapToInt(Integer::parseInt).sum();
     }
