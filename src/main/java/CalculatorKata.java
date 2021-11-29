@@ -35,6 +35,6 @@ public class CalculatorKata {
             throw new NegativeNumberException("negatives not allowed : "+ negativeNumbers);
         }
 
-        return Arrays.stream(split).filter(s -> !s.isEmpty()).mapToInt(Integer::parseInt).sum();
+        return Arrays.stream(split).filter(s -> !s.isEmpty() && Integer.parseInt(s)<=1000).mapToInt(Integer::parseInt).sum();
     }
 }
