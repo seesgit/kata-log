@@ -16,22 +16,24 @@ public class CalculatorKata {
             throw new FormatIncorrectException();
         }
 
-        String delimiter = ",|\\n";
+        String delimiter = ",|\n";
         if(numbers.startsWith("//[")){
 
+            while(numbers.contains("]")){
 
-            String specificDelimiter = numbers.substring(3,numbers.indexOf("]"));
-            char[] chars = specificDelimiter.toCharArray();
-            StringBuilder stringBuilder = new StringBuilder();
-            for (char aChar : chars) {
-                if (isSpecificCharacter(aChar)) {
-                    stringBuilder.append("\\").append(aChar);
-                } else {
-                    stringBuilder.append(aChar);
+                String specificDelimiter = numbers.substring(numbers.indexOf("[")+1,numbers.indexOf("]"));
+                char[] chars = specificDelimiter.toCharArray();
+                StringBuilder stringBuilder = new StringBuilder();
+                for (char aChar : chars) {
+                    if (isSpecificCharacter(aChar)) {
+                        stringBuilder.append("\\").append(aChar);
+                    } else {
+                        stringBuilder.append(aChar);
+                    }
                 }
+                delimiter = delimiter.concat("|"+ stringBuilder);
+                numbers = numbers.substring(numbers.indexOf("]")+1);
             }
-            delimiter = delimiter.concat("|"+ stringBuilder);
-            numbers = numbers.substring(numbers.indexOf("]")+1);
 
         } else if(numbers.startsWith("//")){
 
